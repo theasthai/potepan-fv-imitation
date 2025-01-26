@@ -1,0 +1,47 @@
+@use "sass:math";
+
+// コンテンツの幅(VW計算用)
+$pc-design-width: 1680; // PCデザインの幅
+$tab-design-width: 1024; // tabデザインの幅
+$sp-design-width: 375; // SPデザインの幅
+
+// ブレイクポイント
+$breakpoints: (
+  "sp": 375px,
+  "md": 768px,
+  "tab": 1024px,
+  "pc": 1680px
+) !default;
+
+// responsive(media query)
+@mixin mq($devices...) {
+	@each $device in $devices {
+	  @if map-has-key($breakpoints, $device) {
+		$bp-value: map-get($breakpoints, $device);
+		@media (max-width: $bp-value) {
+		  @content;
+		}
+	  } @else {
+		@warn "ブレイクポイント '#{$name}' は定義されていません。";
+	  }
+	}
+  }
+
+// vw指定用
+// ex) width: vw_pc(200)
+@function vw_pc($size, $viewport: $pc-design-width) {
+	$rate: math.div(100, $viewport);
+	@return $rate * $size * 1vw;
+}
+
+// タブレット用vw計算
+@function vw_tab($size, $viewport: $tab-design-width) {
+	$rate: math.div(100, $viewport);
+	@return $rate * $size * 1vw;
+  }
+
+// スマホ用vw計算
+@function vw_sp($size, $viewport: $sp-design-width) {
+	$rate: math.div(100, $viewport);
+	@return $rate * $size * 1vw;
+}
