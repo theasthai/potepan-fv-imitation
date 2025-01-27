@@ -324,11 +324,12 @@ body {
 				}
 				.right-rectangle {
 					position: absolute;
-					bottom: 0;
+					top: vw_pc(450);
 					right: 0;
 					width: vw_pc(348);
 					@include mq(tab) {
 						width: vw_tab(250);
+						top: vw_tab(450);
 					}
 					img {
 						width: 100%;

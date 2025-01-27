@@ -777,13 +777,14 @@ body main .fv__bg .main-visual img {
 }
 body main .fv__bg .right-rectangle {
   position: absolute;
-  bottom: 0;
+  top: 26.7857142857vw;
   right: 0;
   width: 20.7142857143vw;
 }
 @media (max-width: 1024px) {
   body main .fv__bg .right-rectangle {
     width: 24.4140625vw;
+    top: 43.9453125vw;
   }
 }
 body main .fv__bg .right-rectangle img {
