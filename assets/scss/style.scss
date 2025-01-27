@@ -1,8 +1,9 @@
 @use "reset" as *;
 @use "color" as *;
+@use "mixin" as *;
 
 body {
-	font-family: "Lato", sans-serif;
+	font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	header {
 		position: fixed;
 		top: 0;
@@ -16,7 +17,13 @@ body {
 		background-color: $white;
 		box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.05);
 		.logo {
-			width: 185px;
+			width: vw_pc(185);
+			@include mq(tab) {
+				width: vw_tab(185);
+			}
+			@include mq(sp) {
+				width: vw_sp(185);
+			}
 			padding: 25px 0;
 			transition: opacity 0.2s;
 			&:hover {
@@ -26,9 +33,57 @@ body {
 				width: 100%;
 			}
 		}
+		/* ハンバーガーボタン */
+		.hamburger {
+			display: none;
+			@include mq(md) {
+				display: block;
+			}
+			position: relative;
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+
+			.hamburger__bar {
+				display: block;
+				position: absolute;
+				height: 2px;
+				width: 100%;
+				background-color: $black;
+				left: 0;
+				transition: all 0.3s;
+
+				&:nth-child(1) {
+					top: 5px;
+				}
+				&:nth-child(2) {
+					top: 13px;
+				}
+				&:nth-child(3) {
+					top: 21px;
+				}
+			}
+
+			&.is-active {
+				.hamburger__bar {
+					&:nth-child(1) {
+						top: 10px;
+						transform: rotate(45deg);
+					}
+					&:nth-child(2) {
+						opacity: 0;
+					}
+					&:nth-child(3) {
+						top: 10px;
+						transform: rotate(-45deg);
+					}
+				}
+			}
+		}
 		nav {
 			display: flex;
 			align-items: center;
+			
 			ul {
 				display: flex;
 				li {		
@@ -36,28 +91,84 @@ body {
 						display: flex;
 						flex-direction: column;
 						align-items: center;
-						gap: calc(5 / 1680 * 100vw);
+						gap: vw_pc(5);
 						transition: opacity 0.2s;
 						&:hover {
 							opacity: 0.8;
 						}
 						span {
 							display: block;
-							font-size: calc(12 / 1680 * 100vw);
-							padding-right: calc(50 / 1680 * 100vw);
+							font-size: vw_pc(12);
+							padding-right: vw_pc(50);
+						}
+						.menu_item_en {
+							font-family: "Lato", sans-serif;
 						}
 					}
 				}
 			}
 			.cta_button button {
-				font-size: calc(12 / 1680 * 100vw);
+				font-size: vw_pc(12);
 				color: $white;
 				background-color: $orange;
-				padding: calc(15 / 1680 * 100vw) calc(20 / 1680 * 100vw);
+				padding: vw_pc(15) vw_pc(20);
 				border-radius: 1000px;
 				transition: opacity 0.2s;
 				&:hover {
 					opacity: 0.8;
+				}
+				@include mq(tab) {
+					padding: vw_tab(15) vw_tab(20);
+				}
+				@include mq(sp) {
+					padding: vw_sp(15) vw_sp(20);
+				}
+			}
+			@include mq(md) {
+				display: none;
+				position: relative;
+				&.is-active {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					transform: translateX(0);
+					position: absolute;
+					top: 100%;
+					left: 0;
+					width: 100%;
+					height: 100vh;
+					background-color: rgba(0, 0, 0, 0.8);
+					ul {
+						margin-top: 20px;
+						flex-direction: column;
+						justify-content: center;
+						text-align: center;
+						li {
+							margin: 20px auto;
+							padding: 0;
+							a {
+								color: $orange;
+								margin-top: 10px;
+								span {
+									font-size: vw_sp(8);
+									padding: 0;
+								}
+								.menu_item_en {
+									margin-bottom: 10px;
+									font-family: "Lato", sans-serif;
+									font-size: vw_sp(10);
+									letter-spacing: 5px;
+									color: $white;
+									margin-top: 0px;
+								}
+							}
+						}
+					}
+					.cta_button button {
+						margin-top: 20px;
+						font-size: vw_sp(8);
+						padding: vw_sp(10) vw_sp(13);
+					}
 				}
 			}
 		}
@@ -65,49 +176,97 @@ body {
 	main {
 		.fv {
 			position: relative;
-			height: calc(100vh - (200 / 1680 * 100vw));
+			height: calc(100vh - vw_pc(200));
+			@include mq(tab) {
+				height: calc(100vh - vw_tab(200));
+			}
+			@include mq(sp) {
+				height: calc(100vh - vw_sp(200));
+			}
 			.wrapper_text {
 				position: absolute;
 				z-index: 2;
-				left: calc(300 / 1680 * 100vw);
-				top: calc(50vh - (250 / 1680 * 100vw));
+				left: vw_pc(300);
+				top: calc(50vh - vw_pc(250));
+				@include mq(tab) {
+					left: vw_tab(150);
+					top: calc(50vh - vw_tab(150));
+				}
+				@include mq(sp) {
+					left: vw_sp(300);
+					top: calc(50vh - vw_sp(250));
+				}
 				h1 {
 					color: $black;
-					font-size: calc(42 / 1680 * 100vw);
+					font-size: vw_pc(42);
 					font-weight: 800;
 					line-height: calc(63 / 42);
-					letter-spacing: .05em;
-					margin-bottom: calc(16 / 1680 * 100vw);
+					margin-bottom: vw_pc(16);
+					@include mq(tab) {
+						font-size: vw_tab(42);
+						margin-bottom: vw_tab(16);
+					}
+					@include mq(sp) {
+						font-size: vw_sp(42);
+						margin-bottom: vw_sp(16);
+					}
 					&::after {
 						content: "";
 						position: absolute;
-						top: calc(-100 / 1680 * 100vw);
-						right: calc(-150 / 1680 * 100vw);
-						width: calc(204 / 1680 * 100vw);
-						height: calc(204 / 1680 * 100vw);
+						top: vw_pc(-100);
+						right: vw_pc(-150);
+						width: vw_pc(204);
+						height: vw_pc(204);
 						background-image: url(../images/badge.svg);
 						background-size: contain;
 						background-repeat: no-repeat;
 						background-position: center;
+						@include mq(tab) {
+							top: vw_tab(-100);
+							right: vw_tab(-150);
+							width: vw_tab(204);
+							height: vw_tab(204);
+						}
+						@include mq(sp) {
+							top: vw_sp(-100);
+							right: vw_sp(-150);
+							width: vw_sp(204);
+							height: vw_sp(204);
+						}
 					}
 				}
 				button {
 					width: 100%;
 					text-align: center;
-					font-size: calc(16 / 1680 * 100vw);
+					font-size: vw_pc(16);
 					color: $white;
 					background-color: $orange;
-					padding: calc(15 / 1680 * 100vw) calc(20 / 1680 * 100vw);
+					padding: vw_pc(15) vw_pc(20);
 					border-radius: 1000px;
-					margin-bottom: calc(16 / 1680 * 100vw);
+					margin-bottom: vw_pc(16);
 					transition: opacity 0.2s;
+					@include mq(tab) {
+						font-size: vw_tab(16);
+						padding: vw_tab(15) vw_tab(20);
+						margin-bottom: vw_tab(16);
+					}
+					@include mq(sp) {
+						font-size: vw_sp(16);
+						padding: vw_sp(15) vw_sp(20);
+						margin-bottom: vw_sp(16);
+					}
 					&:hover {
 						opacity: 0.8;
 					}
 				}
 				p {
-					font-size: calc(12 / 1680 * 100vw);
-					font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+					font-size: vw_pc(12);
+					@include mq(tab) {
+						font-size: vw_tab(12);
+					}
+					@include mq(sp) {
+						font-size: vw_sp(12);
+					}
 				}
 			}
 			&__bg {
@@ -115,7 +274,13 @@ body {
 					position: absolute;
 					top: 0;
 					left: 0;
-					width: calc(348 / 1680 * 100vw);
+					width: vw_pc(348);
+					@include mq(tab) {
+						width: vw_tab(250);
+					}
+					@include mq(sp) {
+						width: vw_sp(250);
+					}
 					img {
 						width: 100%;
 						height: auto;
@@ -123,9 +288,19 @@ body {
 				}
 				.fill-rectangle {
 					position: absolute;
-					top: 150px;
-					left: -60px;
-					width: calc(527 / 1680 * 100vw);
+					top: vw_pc(150);
+					left: vw_pc(-60);
+					width: vw_pc(527);
+					@include mq(tab) {
+						top: vw_tab(150);
+						left: vw_tab(-60);
+						width: vw_tab(527);
+					}
+					@include mq(sp) {
+						top: vw_sp(150);
+						left: vw_sp(-60);
+						width: vw_sp(527);
+					}
 					img {
 						width: 100%;
 						height: auto;
@@ -135,7 +310,13 @@ body {
 					position: absolute;
 					top: 0;
 					right: 0;
-					width: calc(770 / 1680 * 100vw);
+					width: vw_pc(770);
+					@include mq(tab) {
+						width: vw_tab(770);
+					}
+					@include mq(sp) {
+						width: vw_sp(770);
+					}
 					img {
 						width: 100%;
 						height: auto;
@@ -145,10 +326,16 @@ body {
 					position: absolute;
 					bottom: 0;
 					right: 0;
-					width: calc(348 / 1680 * 100vw);
+					width: vw_pc(348);
+					@include mq(tab) {
+						width: vw_tab(250);
+					}
 					img {
 						width: 100%;
 						height: auto;
+					}
+					@include mq(md) {
+						display: none;
 					}
 				}
 			}
