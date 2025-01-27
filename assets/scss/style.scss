@@ -187,10 +187,10 @@ body {
 				position: absolute;
 				z-index: 2;
 				left: vw_pc(300);
-				top: calc(50vh - vw_pc(250));
+				top: calc(50vh - vw_pc(150));
 				@include mq(tab) {
 					left: vw_tab(150);
-					top: calc(50vh - vw_tab(150));
+					top: calc(50vh - vw_tab(50));
 				}
 				@include mq(sp) {
 					left: vw_sp(300);
@@ -324,12 +324,16 @@ body {
 				}
 				.right-rectangle {
 					position: absolute;
-					top: vw_pc(450);
+					top: vw_pc(480);
 					right: 0;
 					width: vw_pc(348);
 					@include mq(tab) {
 						width: vw_tab(250);
 						top: vw_tab(450);
+					}
+					@include mq(sp) {
+						width: vw_sp(250);
+						top: vw_sp(450);
 					}
 					img {
 						width: 100%;

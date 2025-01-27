@@ -608,12 +608,12 @@ body main .fv .wrapper_text {
   position: absolute;
   z-index: 2;
   left: 17.8571428571vw;
-  top: calc(50vh - 14.880952381vw);
+  top: calc(50vh - 8.9285714286vw);
 }
 @media (max-width: 1024px) {
   body main .fv .wrapper_text {
     left: 14.6484375vw;
-    top: calc(50vh - 14.6484375vw);
+    top: calc(50vh - 4.8828125vw);
   }
 }
 @media (max-width: 375px) {
@@ -777,7 +777,7 @@ body main .fv__bg .main-visual img {
 }
 body main .fv__bg .right-rectangle {
   position: absolute;
-  top: 26.7857142857vw;
+  top: 28.5714285714vw;
   right: 0;
   width: 20.7142857143vw;
 }
@@ -785,6 +785,12 @@ body main .fv__bg .right-rectangle {
   body main .fv__bg .right-rectangle {
     width: 24.4140625vw;
     top: 43.9453125vw;
+  }
+}
+@media (max-width: 375px) {
+  body main .fv__bg .right-rectangle {
+    width: 66.6666666667vw;
+    top: 120vw;
   }
 }
 body main .fv__bg .right-rectangle img {
